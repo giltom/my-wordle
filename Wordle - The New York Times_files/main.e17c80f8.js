@@ -5057,7 +5057,7 @@ this.wordle = this.wordle || {}, this.wordle.bundle = function (e) {
 
     if (param == null) {
       console.log("Redirecting");
-      window.location.href = new URL("linkgen.html", window.location);
+      window.location.href = new URL("index.html", window.location);
     }
 
     let solution = decrypt_solution(param);
