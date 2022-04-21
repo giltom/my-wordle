@@ -19,7 +19,7 @@
     }
 
     function generate_link() {
-        let solution = document.getElementById("solution").value;
+        let solution = document.getElementById("solution").value.toLowerCase();
         if (solution.length != 5) {
             alert("Please enter exactly 5 characters");
             return;
