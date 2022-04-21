@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<head>
+    <title>Custom Wordle</title>
+</head>
+<body>
+    <label for="solution">Enter solution:</label>
+    <input id="solution" type="text" minlength=5 maxlength=5> <br>
+    <button onclick="generate_link()">Generate Link</button> <br>
+    <a id="link"></a>
+</body>
+<script>
+    function encrypt_solution(s) {
+        let encoded = encodeURIComponent(s);
+        let codes = "";
+        for (let i = 0; i < s.length; i++) {
+            codes += String.fromCharCode(encoded.charCodeAt(i) ^ 0x55);
+        }
+        return window.btoa(codes);
+    }
+
+    function generate_link() {
+        let solution = document.getElementById("solution").value;
+        if (solution.length != 5) {
+            alert("Please enter exactly 5 characters");
+            return;
+        }
+
+        let uri = "wordle.html?s=" + encodeURIComponent(encrypt_solution(solution));
+        let url = (new URL(uri, document.location)).href;
+        console.log(`URL: ${url}`);
+
+        let link = document.getElementById("link");
+        link.textContent = url;
+        link.href = url;
+    }
+</script>
