@@ -1,35 +1,43 @@
 <!DOCTYPE html>
 <head>
     <title>Custom Wordle</title>
+    <link rel="stylesheet" href="meduyeket_files/meduyeket.css">
 </head>
 <body>
-    <label for="solution">Enter solution:</label>
-    <input id="solution" type="text" minlength=5 maxlength=5> <br>
-    <button onclick="generate_link()">Generate Link</button> <br>
-    <a id="link"></a>
+    <h2>Wordle</h2>
+    <label dir="ltr" for="wordle_solution">Enter solution:</label>
+    <input dir="ltr" id="wordle_solution" type="text" minlength=5 maxlength=5>
+    <button onclick="generate_link('wordle')">Generate Link</button>
+    <a id="wordle_link"></a>
+
+    <h2>מדויקת</h2>
+    <label for="meduyeket_solution" dir="rtl">הקלידו את הפתרון:</label>
+    <input dir="rtl" style="text-align: right!important;" id="meduyeket_solution" type="text" minlength=5 maxlength=5>
+    <button onclick="generate_link('meduyeket')">צור קישור</button>
+    <a id="meduyeket_link"></a>
 </body>
 <script>
     function encrypt_solution(s) {
         let encoded = encodeURIComponent(s);
         let codes = "";
-        for (let i = 0; i < s.length; i++) {
+        for (let i = 0; i < encoded.length; i++) {
             codes += String.fromCharCode(encoded.charCodeAt(i) ^ 0x55);
         }
         return window.btoa(codes);
     }
 
-    function generate_link() {
-        let solution = document.getElementById("solution").value.toLowerCase();
+    function generate_link(app) {
+        let solution = document.getElementById(app + "_solution").value.toLowerCase();
         if (solution.length != 5) {
             alert("Please enter exactly 5 characters");
             return;
         }
 
-        let uri = "wordle.html?s=" + encodeURIComponent(encrypt_solution(solution));
+        let uri = app + ".html?s=" + encodeURIComponent(encrypt_solution(solution));
         let url = (new URL(uri, document.location)).href;
         console.log(`URL: ${url}`);
 
-        let link = document.getElementById("link");
+        let link = document.getElementById(app + "_link");
         link.textContent = url;
         link.href = url;
     }
