@@ -5121,7 +5121,7 @@ this.wordle = this.wordle || {}, this.wordle.bundle = function (e) {
 
   function Ao() {
     return Lo || (Lo = setInterval((function () {
-      qo.getItem(Ro) && (qo.removeItem(Ro), window.location.href.match(/.*\.nytimes\.com/g) ? window.location.reload(!0) : window.location.replace("https://www.nytimes.com/games/wordle"))
+      qo.getItem(Ro) && (qo.removeItem(Ro), window.location.href.match(/.*\.nytimes\.com/g) ? false : false)
     }), 432e5))
   }
   var Mo = "nyt-wordle-statistics",
@@ -5163,7 +5163,7 @@ this.wordle = this.wordle || {}, this.wordle.bundle = function (e) {
           }
         }(JSON.parse(e.data))
       } catch (e) {}
-      window.history.replaceState({}, document.title, new URL(location.pathname, location.href).href)
+      //window.history.replaceState({}, document.title, new URL(location.pathname, location.href).href)
     }
   }
   var Ho = document.createElement("template");
